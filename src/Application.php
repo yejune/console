@@ -285,7 +285,7 @@ class Application
                     if (true === is_array($inputList) && 0 < count($inputList)) {
                         $optKey = array_shift($inputList);
 
-                        if (false !== strpos($optKey, '-')) {
+                        if (0 === strpos($optKey, '-')) {
                             $config = $this->getOptionConfig($optKey, $commandPart);
                             $optVal = true;
 
