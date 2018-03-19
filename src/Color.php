@@ -6,7 +6,7 @@ class Color
     /**
      * @var array
      */
-    static $backgroundColors = [
+    public static $backgroundColors = [
         'black'      => '40',
         'red'        => '41',
         'green'      => '42',
@@ -14,13 +14,13 @@ class Color
         'blue'       => '44',
         'magenta'    => '45',
         'cyan'       => '46',
-        'light_gray' => '47'
+        'light_gray' => '47',
     ];
 
     /**
      * @var array
      */
-    static $foregroundColors = [
+    public static $foregroundColors = [
         'default'    => '39',
         'black'      => '30',
         'red'        => '31',
@@ -30,13 +30,14 @@ class Color
         'magenta'    => '35',
         'cyan'       => '36',
         'light_gray' => '37',
-        'white'      => '97'
+        'dark_gray'  => '1;30',
+        'white'      => '97',
     ];
 
     /**
      * @var array
      */
-    static $options = [
+    public static $options = [
         'reset'     => '0',
         'bold'      => '1',
         'dark'      => '2',
@@ -44,27 +45,8 @@ class Color
         'underline' => '4',
         'blink'     => '5',
         'reverse'   => '7',
-        'concealed' => '8'
+        'concealed' => '8',
     ];
-
-    /**
-     * @param $str
-     * @param $color
-     * @param $background_color
-     * @param int                 $width
-     */
-    public static function text($str = '', $color = 'normal',
-                                    $background_color = '',                             $width = 0) {
-        if ($width > 0) {
-            $len = mb_strlen($str);
-
-            if ($width > $len) {
-                $str = $str.str_repeat(' ', $width - $len);
-            }
-        }
-
-        echo self::$color($str, $background_color);
-    }
 
     /**
      * @param  $foregroundColor
@@ -96,6 +78,38 @@ class Color
         $coloredString .= self::build(self::$options['reset']);
 
         return $coloredString;
+    }
+
+    /**
+     * @param $str
+     * @param $color
+     * @param $background_color
+     * @param int                 $width
+     */
+    public static function text($str = '', $color = 'normal', $background_color = '', $width = 0)
+    {
+        if ($width > 0) {
+            $len = mb_strlen($str);
+
+            if ($width > $len) {
+                $str = $str.str_repeat(' ', $width - $len);
+            }
+        }
+
+        echo self::$color($str, $background_color);
+    }
+
+    public static function gettext($str = '', $color = 'normal', $background_color = '', $width = 0)
+    {
+        if ($width > 0) {
+            $len = mb_strlen($str);
+
+            if ($width > $len) {
+                $str = $str.str_repeat(' ', $width - $len);
+            }
+        }
+
+        return self::$color($str, $background_color);
     }
 
     /**
@@ -133,6 +147,7 @@ class Color
 
     /**
      * @param $input
+     * @param mixed $matches
      */
     public static function parseTagsRecursive($matches)
     {
