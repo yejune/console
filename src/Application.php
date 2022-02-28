@@ -323,7 +323,7 @@ class Application
                         $matching['cnt']++;
                         unset($inputOption[$key]);
                     } elseif (!$cnf['require']) {
-// require check
+                        // require check
                     } else {
                         $matching['error'] = 'Option "'.$key.'" not found';
                         break (2);
